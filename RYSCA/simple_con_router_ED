@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# DESCRIPTION: RYSCA (ED): Escenario simple con 2 PCs y un router (útil para pruebas de desarrollo con librawnet)
+
+LIGHTNING_INSTALLATION_PATH=$(dirname $(readlink -f $(which lightning)))
+source $LIGHTNING_INSTALLATION_PATH/functions
+source $LIGHTNING_INSTALLATION_PATH/personalized_functions
+
+# CREACIÓN Y CONFIGURACIÓN DE CONTAINERS
+create_container hX hostX host
+create_interface hX eth1
+clear_interface hX eth1
+
+create_container hY hostY host
+create_interface hY eth1
+clear_interface hY eth1
+
+create_container R1 Router1 router
+create_interface R1 eth0.0
+clear_interface R1 eth0.0
+configure_ip R1 eth0.0 192.168.0.1/24
+create_interface R1 eth0.1
+clear_interface R1 eth0.1
+configure_ip R1 eth0.1 192.168.1.1/24
+create_interface R1 eth0.2
+clear_interface R1 eth0.2
+configure_ip R1 eth0.2 192.168.2.1/24
+create_interface R1 eth0.3
+clear_interface R1 eth0.3
+configure_ip R1 eth0.3 192.168.3.1/24
+create_interface R1 eth0.4
+clear_interface R1 eth0.4
+configure_ip R1 eth0.4 192.168.4.1/24
+create_interface R1 wlan0
+clear_interface R1 wlan0
+configure_ip R1 wlan0 192.168.5.1/24
+
+
+# CREACIÓN DE REDES Y CONEXIONES
+create_net Red1
+connect_machine hX eth1 Red1
+configure_ip hX eth1 192.100.100.101/24
+connect_machine R1 eth0.0 Red1
+
+create_net Red2
+connect_machine hY eth1 Red2
+configure_ip hY eth1 192.100.100.102/24
+connect_machine R1 eth0.1 Red2
+
+
+# MOSTRAR VENTANAS DE COMANDOS
+display_host hX
+display_host hY
+display_router R1
