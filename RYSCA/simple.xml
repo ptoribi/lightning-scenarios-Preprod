@@ -5,11 +5,11 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:noNamespaceSchemaLocation="lightning-xml-schema.xsd">
 
   <container name="hostX" type="host">
-    <interface name="eth1"/>
+    <interface name="eth1" enable_ipv6="no"/>
   </container>
   
   <container name="hostY" type="host">
-    <interface name="eth1"/>
+    <interface name="eth1" enable_ipv6="no"/>
   </container>
   
   

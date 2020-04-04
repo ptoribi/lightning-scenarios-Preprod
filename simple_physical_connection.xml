@@ -5,7 +5,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:noNamespaceSchemaLocation="lightning-xml-schema.xsd">
 
   <container name="h1" hostname="hostPhysConn" type="host">
-    <interface name="phys" link_local_ipv6="no" connected_to_physical_interface="enp0s3"/>
+    <interface name="phys" enable_ipv6="no" connected_to_physical_interface="enp0s3"/>
   </container>
   
 </scenario>
